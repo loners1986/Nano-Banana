@@ -6,11 +6,15 @@
 # next.js
 /.next/
 /out/
+/.next-build/
+/.next-builds/
 
 # production
 /build
 
 # debug
+dev.stdout.log
+dev.stderr.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
