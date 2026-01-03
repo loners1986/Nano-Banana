@@ -7,7 +7,7 @@ export async function Header() {
   let authConfigured = true
 
   try {
-    const supabase = createSupabaseServerClient()
+    const supabase = await createSupabaseServerClient()
     const {
       data: { user: supabaseUser },
     } = await supabase.auth.getUser()

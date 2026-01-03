@@ -7,8 +7,8 @@ function requireEnv(name: "SUPABASE_URL" | "SUPABASE_ANON_KEY"): string {
   return value
 }
 
-export function createSupabaseServerClient() {
-  const cookieStore = cookies()
+export async function createSupabaseServerClient() {
+  const cookieStore = await cookies()
 
   return createServerClient(requireEnv("SUPABASE_URL"), requireEnv("SUPABASE_ANON_KEY"), {
     cookies: {
@@ -23,4 +23,3 @@ export function createSupabaseServerClient() {
     },
   })
 }
-

@@ -7,7 +7,7 @@ export async function GET(req: Request) {
   const next = url.searchParams.get("next") || "/"
 
   try {
-    const supabase = createSupabaseServerClient()
+    const supabase = await createSupabaseServerClient()
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
@@ -27,4 +27,3 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: e instanceof Error ? e.message : String(e) }, { status: 500 })
   }
 }
-

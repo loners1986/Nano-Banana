@@ -11,7 +11,7 @@ export async function GET(req: Request) {
   }
 
   try {
-    const supabase = createSupabaseServerClient()
+    const supabase = await createSupabaseServerClient()
     const { error } = await supabase.auth.exchangeCodeForSession(code)
     if (error) {
       return NextResponse.json({ error: error.message }, { status: 500 })
@@ -22,4 +22,3 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: e instanceof Error ? e.message : String(e) }, { status: 500 })
   }
 }
-

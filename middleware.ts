@@ -1,12 +1,22 @@
 import { NextResponse, type NextRequest } from "next/server"
 import { createServerClient } from "@supabase/ssr"
 
+function isValidHttpUrl(value: string) {
+  try {
+    const url = new URL(value)
+    return url.protocol === "http:" || url.protocol === "https:"
+  } catch {
+    return false
+  }
+}
+
 export async function middleware(request: NextRequest) {
   const response = NextResponse.next({ request })
 
   const supabaseUrl = process.env.SUPABASE_URL
   const supabaseAnonKey = process.env.SUPABASE_ANON_KEY
   if (!supabaseUrl || !supabaseAnonKey) return response
+  if (!isValidHttpUrl(supabaseUrl)) return response
 
   const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
     cookies: {
@@ -29,4 +39,3 @@ export async function middleware(request: NextRequest) {
 export const config = {
   matcher: ["/((?!_next/static|_next/image|favicon.ico|api/).*)"],
 }
-
