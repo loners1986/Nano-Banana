@@ -19,6 +19,12 @@ export async function middleware(request: NextRequest) {
   if (!isValidHttpUrl(supabaseUrl)) return response
 
   const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
+    global: {
+      fetch: (input, init) => {
+        if (init?.signal) return fetch(input, init)
+        return fetch(input, { ...init, signal: AbortSignal.timeout(2_000) })
+      },
+    },
     cookies: {
       getAll() {
         return request.cookies.getAll()
@@ -32,7 +38,11 @@ export async function middleware(request: NextRequest) {
     },
   })
 
-  await supabase.auth.getUser()
+  try {
+    await supabase.auth.getUser()
+  } catch {
+    return response
+  }
   return response
 }
 
