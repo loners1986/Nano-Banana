@@ -58,7 +58,7 @@ export async function Header() {
             </>
           ) : (
             <Button asChild className="bg-banana-400 text-banana-900 hover:bg-banana-500">
-              <Link href="/auth/sign-in">Sign in with Google</Link>
+              <a href="/auth/sign-in">Sign in with Google</a>
             </Button>
           )}
         </div>
