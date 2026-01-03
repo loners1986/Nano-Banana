@@ -1,70 +1,68 @@
-"use client"
-
-import { Card } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { Zap } from "lucide-react"
 
 const showcaseItems = [
   {
+    image: "/majestic-mountain-landscape-with-snow-peaks-and-su.jpg",
     title: "Ultra-Fast Mountain Generation",
     description: "Created in 0.8 seconds with Nano Banana's optimized neural engine",
-    image: "/majestic-mountain-landscape.jpg",
   },
   {
+    image: "/beautiful-zen-garden-with-cherry-blossoms-and-pond.jpg",
     title: "Instant Garden Creation",
     description: "Complex scene rendered in milliseconds using Nano Banana technology",
-    image: "/beautiful-garden-with-flowers.jpg",
   },
   {
+    image: "/tropical-beach-with-turquoise-water-and-palm-trees.jpg",
     title: "Real-time Beach Synthesis",
     description: "Nano Banana delivers photorealistic results at lightning speed",
-    image: "/tropical-beach-sunset.png",
   },
   {
+    image: "/northern-lights-aurora-borealis-over-snowy-mountai.jpg",
     title: "Rapid Aurora Generation",
     description: "Advanced effects processed instantly with Nano Banana AI",
-    image: "/images/northern-lights.png",
   },
 ]
 
 export function Showcase() {
   return (
-    <section id="showcase" className="py-16">
+    <section id="showcase" className="bg-muted/30 py-20">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <div className="inline-block mb-4 px-4 py-1.5 bg-banana/10 text-banana-foreground rounded-full text-sm font-medium">
-            Nano Banana Speed
-          </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Showcase</h2>
-          <p className="text-lg text-muted-foreground">Lightning-Fast AI Creations</p>
-          <p className="text-muted-foreground mt-2">See what Nano Banana generates in milliseconds</p>
+        <div className="mb-12 text-center">
+          <h2 className="mb-2 text-sm font-semibold uppercase tracking-wider text-banana-600">Showcase</h2>
+          <h3 className="text-3xl font-bold text-foreground md:text-4xl">Lightning-Fast AI Creations</h3>
+          <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">See what Nano Banana generates in milliseconds</p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto mb-12">
+        <div className="grid gap-6 md:grid-cols-2">
           {showcaseItems.map((item, index) => (
-            <Card key={index} className="overflow-hidden group hover:shadow-xl transition-shadow">
-              <div className="aspect-video overflow-hidden">
-                <img
-                  src={item.image || "/placeholder.svg"}
-                  alt={item.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div className="p-6">
-                <div className="inline-block mb-2 px-3 py-1 bg-banana/10 text-banana-foreground rounded-full text-xs font-medium">
-                  Nano Banana Speed
+            <Card key={index} className="group overflow-hidden border-banana-200/50 transition-all hover:shadow-xl">
+              <CardContent className="p-0">
+                <div className="relative aspect-[3/2] overflow-hidden">
+                  <img
+                    src={item.image || "/placeholder.svg"}
+                    alt={item.title}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                    <div className="mb-2 flex items-center gap-2 text-banana-300">
+                      <Zap className="h-4 w-4" />
+                      <span className="text-xs font-medium">Nano Banana Speed</span>
+                    </div>
+                    <h4 className="mb-1 text-lg font-semibold">{item.title}</h4>
+                    <p className="text-sm text-white/80">{item.description}</p>
+                  </div>
                 </div>
-                <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                <p className="text-sm text-muted-foreground">{item.description}</p>
-              </div>
+              </CardContent>
             </Card>
           ))}
         </div>
 
-        <div className="text-center">
-          <p className="text-muted-foreground mb-4">Experience the power of Nano Banana yourself</p>
-          <Button size="lg" className="bg-banana text-banana-foreground hover:bg-banana/90">
-            Try Nano Banana Generator
-          </Button>
+        <div className="mt-12 text-center">
+          <p className="mb-4 text-muted-foreground">Experience the power of Nano Banana yourself</p>
+          <Button className="bg-banana-400 text-banana-900 hover:bg-banana-500">Try Nano Banana Generator</Button>
         </div>
       </div>
     </section>

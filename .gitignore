@@ -23,6 +23,10 @@ yarn-error.log*
 # env files
 .env*
 
+# local debug artifacts
+dev-server.*.log
+.openrouter-*.html
+
 # vercel
 .vercel
 

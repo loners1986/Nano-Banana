@@ -4,31 +4,26 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(0.99 0 0);
-  --foreground: oklch(0.15 0 0);
+  --background: oklch(0.995 0.002 90);
+  --foreground: oklch(0.175 0.01 75);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0 0);
+  --card-foreground: oklch(0.175 0.01 75);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0 0);
-  --primary: oklch(0.2 0 0);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.96 0 0);
-  --secondary-foreground: oklch(0.2 0 0);
-  --muted: oklch(0.96 0 0);
-  --muted-foreground: oklch(0.55 0 0);
-  --accent: oklch(0.96 0 0);
-  --accent-foreground: oklch(0.2 0 0);
+  --popover-foreground: oklch(0.175 0.01 75);
+  --primary: oklch(0.85 0.17 90);
+  --primary-foreground: oklch(0.25 0.05 75);
+  --secondary: oklch(0.97 0.01 90);
+  --secondary-foreground: oklch(0.25 0.05 75);
+  --muted: oklch(0.96 0.01 90);
+  --muted-foreground: oklch(0.5 0.02 75);
+  --accent: oklch(0.97 0.02 90);
+  --accent-foreground: oklch(0.25 0.05 75);
   --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(0.92 0 0);
-  --input: oklch(0.92 0 0);
-  --ring: oklch(0.7 0 0);
-
-  /* Added banana theme colors */
-  --banana: oklch(0.88 0.15 95);
-  --banana-foreground: oklch(0.25 0.08 85);
-
-  --chart-1: oklch(0.646 0.222 41.116);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: oklch(0.92 0.02 90);
+  --input: oklch(0.92 0.02 90);
+  --ring: oklch(0.85 0.17 90);
+  --chart-1: oklch(0.85 0.17 90);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
@@ -42,50 +37,43 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  /* Banana color palette */
+  --banana-50: oklch(0.99 0.03 95);
+  --banana-100: oklch(0.97 0.06 92);
+  --banana-200: oklch(0.93 0.1 90);
+  --banana-300: oklch(0.89 0.14 88);
+  --banana-400: oklch(0.85 0.17 86);
+  --banana-500: oklch(0.78 0.16 82);
+  --banana-600: oklch(0.65 0.14 75);
+  --banana-700: oklch(0.5 0.12 70);
+  --banana-800: oklch(0.4 0.1 68);
+  --banana-900: oklch(0.3 0.08 65);
 }
 
 .dark {
-  --background: oklch(0.12 0 0);
-  --foreground: oklch(0.98 0 0);
-  --card: oklch(0.15 0 0);
-  --card-foreground: oklch(0.98 0 0);
-  --popover: oklch(0.15 0 0);
-  --popover-foreground: oklch(0.98 0 0);
-  --primary: oklch(0.98 0 0);
-  --primary-foreground: oklch(0.2 0 0);
-  --secondary: oklch(0.27 0 0);
-  --secondary-foreground: oklch(0.98 0 0);
-  --muted: oklch(0.27 0 0);
-  --muted-foreground: oklch(0.7 0 0);
-  --accent: oklch(0.27 0 0);
-  --accent-foreground: oklch(0.98 0 0);
+  --background: oklch(0.145 0.01 75);
+  --foreground: oklch(0.985 0.01 90);
+  --card: oklch(0.175 0.01 75);
+  --card-foreground: oklch(0.985 0.01 90);
+  --popover: oklch(0.175 0.01 75);
+  --popover-foreground: oklch(0.985 0.01 90);
+  --primary: oklch(0.85 0.17 90);
+  --primary-foreground: oklch(0.25 0.05 75);
+  --secondary: oklch(0.269 0.01 75);
+  --secondary-foreground: oklch(0.985 0.01 90);
+  --muted: oklch(0.269 0.01 75);
+  --muted-foreground: oklch(0.708 0.01 90);
+  --accent: oklch(0.269 0.01 75);
+  --accent-foreground: oklch(0.985 0.01 90);
   --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(0.27 0 0);
-  --input: oklch(0.27 0 0);
-  --ring: oklch(0.44 0 0);
-
-  /* Added dark mode banana colors */
-  --banana: oklch(0.75 0.13 90);
-  --banana-foreground: oklch(0.15 0.05 85);
-
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.3 0.02 75);
+  --input: oklch(0.3 0.02 75);
+  --ring: oklch(0.85 0.17 90);
 }
 
 @theme inline {
-  /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
   --font-sans: "Geist", "Geist Fallback";
   --font-mono: "Geist Mono", "Geist Mono Fallback";
   --color-background: var(--background);
@@ -107,11 +95,6 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-
-  /* Added banana theme tokens */
-  --color-banana: var(--banana);
-  --color-banana-foreground: var(--banana-foreground);
-
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -129,6 +112,18 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Banana colors for Tailwind */
+  --color-banana-50: var(--banana-50);
+  --color-banana-100: var(--banana-100);
+  --color-banana-200: var(--banana-200);
+  --color-banana-300: var(--banana-300);
+  --color-banana-400: var(--banana-400);
+  --color-banana-500: var(--banana-500);
+  --color-banana-600: var(--banana-600);
+  --color-banana-700: var(--banana-700);
+  --color-banana-800: var(--banana-800);
+  --color-banana-900: var(--banana-900);
 }
 
 @layer base {

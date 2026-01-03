@@ -6,7 +6,7 @@ import "./globals.css"
 export const metadata: Metadata = {
   title: "Nano Banana - AI Image Editor | Edit Photos with Text",
   description:
-    "Transform any image with simple text prompts. Nano Banana's advanced model delivers consistent character editing and scene preservation that surpasses Flux Kontext.",
+    "Transform any image with simple text prompts. Nano Banana delivers consistent character editing and scene preservation. Experience the future of AI image editing.",
   generator: "v0.app",
   icons: {
     icon: [

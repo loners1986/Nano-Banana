@@ -1,48 +1,48 @@
 # Repository Guidelines
 
-## Project Structure & Module Organization
+## Project Structure
 
-This repository is a **Next.js (App Router) + TypeScript** site with Tailwind CSS and shadcn/ui.
-
-- `app/`: route tree and layouts (`app/layout.tsx`, `app/page.tsx`, global styles in `app/globals.css`)
-- `components/`: shared React components (notably `components/ui/` for shadcn/ui primitives)
-- `hooks/`: reusable React hooks (name hooks `useXyz`)
-- `lib/`: shared utilities (import via `@/lib/...`)
-- `public/`: static assets served as-is (images, icons)
-- `styles/`: additional styling (if used)
-
-Path alias: use `@/` (configured in `tsconfig.json`) instead of long relative imports.
+- `app/`: Next.js App Router pages/layouts (entry: `app/page.tsx`, global styles: `app/globals.css`).
+- `components/`: shared React components; `components/ui/` contains shadcn/ui building blocks.
+- `hooks/`: reusable React hooks (mirrors some shadcn patterns).
+- `lib/`: utilities (e.g., `lib/utils.ts`), shared helpers, and non-UI logic.
+- `public/`: static assets served at `/` (images, icons).
+- `styles/`: additional global CSS (if used alongside `app/globals.css`).
 
 ## Build, Test, and Development Commands
 
-Package manager: **pnpm** (lockfile: `pnpm-lock.yaml`).
+This repo uses `pnpm` (see `pnpm-lock.yaml`).
 
-- `pnpm install`: install dependencies
-- `pnpm dev`: run local dev server (hot reload)
-- `pnpm build`: production build (`next build`)
-- `pnpm start`: run the built app (`next start`)
-- `pnpm exec tsc --noEmit`: typecheck (recommended because `next.config.mjs` allows builds with TS errors)
+- `pnpm install`: install dependencies.
+- `pnpm dev`: run the local dev server (Next.js).
+- `pnpm build`: production build.
+- `pnpm start`: serve the production build.
+- `pnpm lint`: run ESLint over the project.
 
-Linting: `pnpm lint` runs `eslint .`, but ESLint may not be configured in this repo yet. If you add linting, prefer `eslint` + `eslint-config-next` and use `next lint`.
+## Coding Style & Naming
 
-## Coding Style & Naming Conventions
-
-- TypeScript/TSX only; keep components in **PascalCase**, hooks in **camelCase** with `use` prefix.
-- Match existing formatting: **2-space indentation**, no semicolons, and consistent quote style within a file.
-- Tailwind-first styling; keep design tokens in `app/globals.css` (see the `--banana` theme variables).
+- Language: TypeScript + React (Next.js). Use the path alias `@/*` (configured in `tsconfig.json`).
+- Formatting: follow existing files (2-space indent, double quotes, no semicolons).
+- Components: `PascalCase` filenames and exports (e.g., `components/editor-section.tsx`).
+- Hooks: `useSomething` in `hooks/` (e.g., `hooks/use-toast.ts`).
 
 ## Testing Guidelines
 
-There is no dedicated test suite in this workspace. If you introduce non-trivial logic, add a test framework (e.g., Vitest or Jest) and colocate tests near code (e.g., `components/__tests__/Button.test.tsx`).
+There are no automated tests configured in this repository yet. For changes, validate with:
+
+- `pnpm dev` for UI/interaction checks
+- `pnpm build` to catch build-time regressions
 
 ## Commit & Pull Request Guidelines
 
-This directory is not currently a Git worktree, so no commit conventions can be inferred here. Recommended:
+No Git history is included in this workspace, so use a consistent convention:
 
-- Commit messages: Conventional Commits (e.g., `feat: add showcase carousel`, `fix: handle empty upload`)
-- PRs: include a short description, screenshots for UI changes, and any relevant issue links
+- Commits: `feat: ...`, `fix: ...`, `chore: ...`, `refactor: ...` (Conventional Commits style).
+- PRs: describe the change, link issues if applicable, and include screenshots/GIFs for UI changes.
+- Keep PRs small and focused; avoid unrelated formatting-only churn.
 
-## Configuration & Security
+## Configuration Notes
 
-- Put secrets in `.env.local` and never commit them.
-- `next.config.mjs` sets `images.unoptimized = true`; keep image usage compatible with that setting.
+- If you add environment variables, document them and use `.env.local` (do not commit secrets).
+- `next.config.mjs` currently allows builds even with TypeScript errors; treat `pnpm lint` and editor TS errors as gating signals.
+
