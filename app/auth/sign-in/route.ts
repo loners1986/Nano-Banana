@@ -1,9 +1,29 @@
 import { NextResponse } from "next/server"
 import { createSupabaseServerClient } from "@/lib/supabase/server"
 
+function getBaseUrl(req: Request) {
+  const configured = process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL
+  if (configured) {
+    try {
+      const url = new URL(configured)
+      if (url.protocol === "http:" || url.protocol === "https:") return url.origin
+    } catch {
+      // ignore
+    }
+  }
+
+  const forwardedProto = req.headers.get("x-forwarded-proto")
+  const forwardedHost = req.headers.get("x-forwarded-host")
+  const host = forwardedHost || req.headers.get("host")
+  const proto = forwardedProto || "http"
+  if (host) return `${proto}://${host}`
+
+  return new URL(req.url).origin
+}
+
 export async function GET(req: Request) {
   const url = new URL(req.url)
-  const origin = url.origin
+  const origin = getBaseUrl(req)
   const next = url.searchParams.get("next") || "/"
 
   try {
