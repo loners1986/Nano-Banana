@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { SUPPORT_EMAIL } from "@/lib/site"
 
 export function Footer() {
   return (
@@ -11,23 +12,32 @@ export function Footer() {
           </div>
 
           <nav className="flex flex-wrap items-center justify-center gap-6">
-            <Link href="#generator" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+            <Link href="/#generator" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
               Editor
             </Link>
-            <Link href="#features" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-              Features
+            <Link href="/pricing" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+              Pricing
             </Link>
-            <Link href="#showcase" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-              Showcase
+            <Link href="/privacy" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+              Privacy
             </Link>
-            <Link href="#faq" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-              FAQ
+            <Link href="/terms" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+              Terms
+            </Link>
+            <Link href="/contact" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+              Contact
             </Link>
           </nav>
 
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Nano Banana. All rights reserved.
-          </p>
+          <div className="space-y-1 text-center md:text-right">
+            <p className="text-sm text-muted-foreground">
+              Support:{" "}
+              <a className="underline underline-offset-2" href={`mailto:${SUPPORT_EMAIL}`}>
+                {SUPPORT_EMAIL}
+              </a>
+            </p>
+            <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} Nano Banana. All rights reserved.</p>
+          </div>
         </div>
       </div>
     </footer>

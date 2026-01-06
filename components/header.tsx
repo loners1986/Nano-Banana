@@ -2,6 +2,22 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { createSupabaseServerClient } from "@/lib/supabase/server"
 
+async function withTimeout<T>(promise: Promise<T>, timeoutMs: number): Promise<T> {
+  const controller = new AbortController()
+  const timeout = setTimeout(() => controller.abort(), timeoutMs)
+
+  try {
+    return await Promise.race([
+      promise,
+      new Promise<T>((_, reject) => {
+        controller.signal.addEventListener("abort", () => reject(new Error("Timed out")))
+      }),
+    ])
+  } finally {
+    clearTimeout(timeout)
+  }
+}
+
 export async function Header() {
   let user: { email?: string | null } | null = null
   let authConfigured = true
@@ -10,10 +26,12 @@ export async function Header() {
     const supabase = await createSupabaseServerClient()
     const {
       data: { user: supabaseUser },
-    } = await supabase.auth.getUser()
+    } = await withTimeout(supabase.auth.getUser(), 1500)
     user = supabaseUser
-  } catch {
-    authConfigured = false
+  } catch (e) {
+    if (e instanceof Error && /Missing SUPABASE_(URL|ANON_KEY)/.test(e.message)) {
+      authConfigured = false
+    }
   }
 
   return (
@@ -25,16 +43,19 @@ export async function Header() {
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex">
-          <Link href="#generator" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+          <Link href="/#generator" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
             Editor
           </Link>
-          <Link href="#features" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+          <Link href="/pricing" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+            Pricing
+          </Link>
+          <Link href="/#features" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
             Features
           </Link>
-          <Link href="#showcase" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+          <Link href="/#showcase" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
             Showcase
           </Link>
-          <Link href="#faq" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+          <Link href="/#faq" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
             FAQ
           </Link>
         </nav>

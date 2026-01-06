@@ -8,6 +8,7 @@
 /out/
 /.next-build/
 /.next-builds/
+/.next-dev-*/
 
 # production
 /build
@@ -26,6 +27,12 @@ yarn-error.log*
 # local debug artifacts
 dev-server.*.log
 .openrouter-*.html
+*.err.log
+*.out.log
+
+# local config experiments
+/eslint.config.mjs
+/proxy.ts
 
 # vercel
 .vercel

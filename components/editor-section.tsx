@@ -3,14 +3,15 @@
 import type React from "react"
 
 import { useEffect, useRef, useState, useCallback } from "react"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Switch } from "@/components/ui/switch"
 import { Label } from "@/components/ui/label"
 import { Upload, ImageIcon, Sparkles, X, Loader2, Download, ExternalLink } from "lucide-react"
+import Image from "next/image"
 
 type UploadedImage = {
   file: File
@@ -20,7 +21,6 @@ type UploadedImage = {
 export function EditorSection() {
   const [images, setImages] = useState<UploadedImage[]>([])
   const [prompt, setPrompt] = useState("")
-  const [model, setModel] = useState("nano-banana")
   const [isGenerating, setIsGenerating] = useState(false)
   const [generatedImages, setGeneratedImages] = useState<string[]>([])
   const [error, setError] = useState<string | null>(null)
@@ -90,12 +90,15 @@ export function EditorSection() {
     setIsGenerating(true)
     setError(null)
 
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), 30_000)
+
     try {
       const formData = new FormData()
       formData.set("prompt", prompt)
       for (const img of images) formData.append("images", img.file, img.file.name)
 
-      const res = await fetch("/api/generate", { method: "POST", body: formData })
+      const res = await fetch("/api/generate", { method: "POST", body: formData, signal: controller.signal })
 
       const text = await res.text()
       let data: { images?: string[]; error?: string; detail?: string } = {}
@@ -111,9 +114,17 @@ export function EditorSection() {
 
       setGeneratedImages(data.images ?? [])
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Generation failed")
+      const message =
+        e instanceof Error && e.name === "AbortError"
+          ? "Request timed out. Check your network and OPENROUTER_API_KEY."
+          : e instanceof Error
+            ? e.message
+            : "Generation failed"
+
+      setError(message)
       setGeneratedImages([])
     } finally {
+      clearTimeout(timeout)
       setIsGenerating(false)
     }
   }
@@ -157,8 +168,7 @@ export function EditorSection() {
           <h2 className="mb-2 text-sm font-semibold uppercase tracking-wider text-banana-600">Get Started</h2>
           <h3 className="text-3xl font-bold text-foreground md:text-4xl">Try The AI Editor</h3>
           <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-            Experience the power of Nano Banana's natural language image editing. Transform any photo with simple text
-            commands.
+            Upload an image, describe the edit you want, and generate a new result.
           </p>
         </div>
 
@@ -185,19 +195,10 @@ export function EditorSection() {
 
                 <TabsContent value="img2img" className="space-y-4 pt-4">
                   <div>
-                    <Label className="mb-2 block text-sm font-medium">AI Model Selection</Label>
-                    <Select value={model} onValueChange={setModel}>
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="nano-banana">🍌 Nano Banana</SelectItem>
-                        <SelectItem value="nano-banana-pro">🍌 Nano Banana Pro</SelectItem>
-                        <SelectItem value="seedream">SeeDream 4</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <Label className="mb-2 block text-sm font-medium">Model</Label>
+                    <p className="text-sm text-muted-foreground">Gemini 2.5 Flash Image (via OpenRouter)</p>
                     <p className="mt-1 text-xs text-muted-foreground">
-                      Different models offer unique characteristics and styles
+                      Your images and prompts are sent to a third-party AI provider to generate outputs.
                     </p>
                   </div>
 
@@ -230,10 +231,13 @@ export function EditorSection() {
                         <div className="grid grid-cols-3 gap-2">
                           {images.map((img, index) => (
                             <div key={index} className="group relative aspect-square overflow-hidden rounded-md">
-                              <img
+                              <Image
                                 src={img.previewUrl || "/placeholder.svg"}
                                 alt={`Upload ${index + 1}`}
-                                className="h-full w-full object-contain"
+                                fill
+                                sizes="(max-width: 1024px) 33vw, 200px"
+                                className="object-contain"
+                                unoptimized
                               />
                               <button
                                 onClick={() => removeImage(index)}
@@ -272,17 +276,8 @@ export function EditorSection() {
 
                 <TabsContent value="txt2img" className="space-y-4 pt-4">
                   <div>
-                    <Label className="mb-2 block text-sm font-medium">AI Model Selection</Label>
-                    <Select value={model} onValueChange={setModel}>
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="nano-banana">🍌 Nano Banana</SelectItem>
-                        <SelectItem value="nano-banana-pro">🍌 Nano Banana Pro</SelectItem>
-                        <SelectItem value="seedream">SeeDream 4</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <Label className="mb-2 block text-sm font-medium">Model</Label>
+                    <p className="text-sm text-muted-foreground">Gemini 2.5 Flash Image (via OpenRouter)</p>
                   </div>
                 </TabsContent>
               </Tabs>
@@ -313,6 +308,18 @@ export function EditorSection() {
               </Button>
 
               {error ? <p className="text-sm text-destructive">{error}</p> : null}
+
+              <p className="text-xs text-muted-foreground">
+                Don&apos;t upload sensitive personal data. By generating you agree to our{" "}
+                <Link className="underline underline-offset-2" href="/terms">
+                  Terms
+                </Link>{" "}
+                and{" "}
+                <Link className="underline underline-offset-2" href="/privacy">
+                  Privacy Policy
+                </Link>
+                .
+              </p>
             </CardContent>
           </Card>
 
@@ -336,10 +343,13 @@ export function EditorSection() {
                   <div className="grid h-full w-full grid-cols-2 gap-2 p-2">
                     {generatedImages.map((src, idx) => (
                       <div key={idx} className="group relative overflow-hidden rounded-md bg-background">
-                        <img
+                        <Image
                           src={src || "/placeholder.svg"}
                           alt={`Generated result ${idx + 1}`}
-                          className="h-full w-full object-contain"
+                          fill
+                          sizes="(max-width: 1024px) 50vw, 300px"
+                          className="object-contain"
+                          unoptimized
                         />
                         <div className="absolute right-2 top-2 flex gap-2 opacity-0 transition-opacity group-hover:opacity-100">
                           <button

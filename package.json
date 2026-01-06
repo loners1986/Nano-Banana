@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "dev": "next dev",
-    "lint": "eslint .",
+    "dev": "powershell -ExecutionPolicy Bypass -File scripts/dev.ps1",
+    "lint": "set ESLINT_USE_FLAT_CONFIG=false&& eslint .",
     "start": "next start"
   },
   "dependencies": {
@@ -63,6 +63,8 @@
     "zod": "3.25.76"
   },
   "devDependencies": {
+    "eslint": "8.57.1",
+    "eslint-config-next": "15.4.6",
     "@tailwindcss/postcss": "^4.1.9",
     "@types/node": "^22",
     "@types/react": "^19",

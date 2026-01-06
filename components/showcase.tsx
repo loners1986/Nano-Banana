@@ -1,6 +1,7 @@
-import { Card, CardContent } from "@/components/ui/card"
+﻿import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Zap } from "lucide-react"
+import Image from "next/image"
 
 const showcaseItems = [
   {
@@ -40,10 +41,12 @@ export function Showcase() {
             <Card key={index} className="group overflow-hidden border-banana-200/50 transition-all hover:shadow-xl">
               <CardContent className="p-0">
                 <div className="relative aspect-[3/2] overflow-hidden">
-                  <img
+                  <Image
                     src={item.image || "/placeholder.svg"}
                     alt={item.title}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
@@ -62,7 +65,9 @@ export function Showcase() {
 
         <div className="mt-12 text-center">
           <p className="mb-4 text-muted-foreground">Experience the power of Nano Banana yourself</p>
-          <Button className="bg-banana-400 text-banana-900 hover:bg-banana-500">Try Nano Banana Generator</Button>
+          <Button asChild className="bg-banana-400 text-banana-900 hover:bg-banana-500">
+            <a href="#generator">Try Nano Banana Generator</a>
+          </Button>
         </div>
       </div>
     </section>

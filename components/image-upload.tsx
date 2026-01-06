@@ -4,6 +4,7 @@ import type React from "react"
 
 import { useRef, useState, useCallback } from "react"
 import { Upload, X } from "lucide-react"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 
 interface ImageUploadProps {
@@ -77,10 +78,13 @@ export function ImageUpload({ onImageUpload }: ImageUploadProps) {
       >
         {preview ? (
           <div className="relative aspect-video w-full">
-            <img
+            <Image
               src={preview || "/placeholder.svg"}
               alt="Preview"
-              className="w-full h-full object-contain rounded-lg"
+              fill
+              sizes="(max-width: 768px) 100vw, 600px"
+              className="rounded-lg object-contain"
+              unoptimized
             />
             <Button size="icon" variant="secondary" className="absolute top-2 right-2" onClick={clearImage}>
               <X className="h-4 w-4" />

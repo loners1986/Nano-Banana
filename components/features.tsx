@@ -5,25 +5,22 @@ const features = [
   {
     icon: MessageSquare,
     title: "Natural Language Editing",
-    description:
-      "Edit images using simple text prompts. Nano Banana AI understands complex instructions like GPT for images.",
+    description: "Edit images using simple text prompts. Describe the change you want and generate a new result.",
   },
   {
     icon: User,
     title: "Character Consistency",
-    description:
-      "Maintain perfect character details across edits. This model excels at preserving faces and identities.",
+    description: "Designed to preserve key details across edits, depending on the input and prompt.",
   },
   {
     icon: Layers,
     title: "Scene Preservation",
-    description: "Seamlessly blend edits with original backgrounds. Superior scene fusion compared to Flux Kontext.",
+    description: "Helps keep the original composition while applying targeted changes.",
   },
   {
     icon: Zap,
     title: "One-Shot Editing",
-    description:
-      "Perfect results in a single attempt. Nano Banana solves one-shot image editing challenges effortlessly.",
+    description: "Get a result quickly, iterate with prompts, and download your favorites.",
   },
   {
     icon: Images,
@@ -45,8 +42,7 @@ export function Features() {
           <h2 className="mb-2 text-sm font-semibold uppercase tracking-wider text-banana-600">Core Features</h2>
           <h3 className="text-3xl font-bold text-foreground md:text-4xl">Why Choose Nano Banana?</h3>
           <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-            Nano Banana is the most advanced AI image editor. Revolutionize your photo editing with natural language
-            understanding.
+            A fast, simple interface for AI-assisted image edits — with clear pricing and transparent policies.
           </p>
         </div>
 

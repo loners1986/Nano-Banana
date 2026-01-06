@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button"
+﻿import { Button } from "@/components/ui/button"
 import { BananaDecoration } from "@/components/banana-decoration"
 
 export function Hero() {
@@ -10,27 +10,29 @@ export function Hero() {
 
       <div className="container mx-auto px-4 text-center">
         <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-banana-100 px-4 py-2 text-sm font-medium text-banana-700">
-          <span>🍌</span>
-          <span>The AI model that outperforms Flux Kontext</span>
+          <span>New</span>
+          <span>AI image editing in your browser</span>
           <a href="#generator" className="font-semibold hover:underline">
-            Try Now →
+            Try now →
           </a>
         </div>
 
         <h1 className="mb-6 text-balance text-5xl font-bold tracking-tight text-foreground md:text-7xl">Nano Banana</h1>
 
         <p className="mx-auto mb-10 max-w-2xl text-pretty text-lg text-muted-foreground md:text-xl">
-          Transform any image with simple text prompts. Nano Banana's advanced model delivers consistent character
-          editing and scene preservation that surpasses Flux Kontext. Experience the future of AI image editing.
+          Transform images with simple text prompts. Nano Banana routes your request to third-party AI models and
+          returns edited outputs in seconds.
         </p>
 
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Button size="lg" className="gap-2 bg-banana-400 px-8 text-banana-900 hover:bg-banana-500">
-            Start Editing
-            <span>🍌</span>
+          <Button asChild size="lg" className="gap-2 bg-banana-400 px-8 text-banana-900 hover:bg-banana-500">
+            <a href="#generator">
+              Start Editing
+              <span aria-hidden>→</span>
+            </a>
           </Button>
-          <Button variant="outline" size="lg" className="px-8 bg-transparent">
-            View Examples
+          <Button asChild variant="outline" size="lg" className="px-8 bg-transparent">
+            <a href="#showcase">View Examples</a>
           </Button>
         </div>
 

@@ -4,24 +4,24 @@ import { Star } from "lucide-react"
 
 const reviews = [
   {
-    name: "AIArtistPro",
-    role: "Digital Creator",
-    avatar: "AA",
+    name: "Sample User",
+    role: "Creator",
+    avatar: "SU",
     content:
-      "This editor completely changed my workflow. The character consistency is incredible - miles ahead of Flux Kontext!",
+      "Fast to iterate on edits — uploading, prompting, and downloading is straightforward.",
   },
   {
-    name: "ContentCreator",
-    role: "UGC Specialist",
-    avatar: "CC",
+    name: "Sample User",
+    role: "Marketer",
+    avatar: "SU",
     content:
-      "Creating consistent AI influencers has never been easier. It maintains perfect face details across edits!",
+      "Helpful for rapid mockups. Results vary, but it saves time when exploring ideas.",
   },
   {
-    name: "PhotoEditor",
-    role: "Professional Editor",
-    avatar: "PE",
-    content: "One-shot editing is basically solved with this tool. The scene blending is so natural and realistic!",
+    name: "Sample User",
+    role: "Designer",
+    avatar: "SU",
+    content: "Nice UI and quick turnaround for common edits like background and object changes.",
   },
 ]
 
@@ -30,8 +30,11 @@ export function Reviews() {
     <section id="reviews" className="py-20">
       <div className="container mx-auto px-4">
         <div className="mb-12 text-center">
-          <h2 className="mb-2 text-sm font-semibold uppercase tracking-wider text-banana-600">User Reviews</h2>
-          <h3 className="text-3xl font-bold text-foreground md:text-4xl">What creators are saying</h3>
+          <h2 className="mb-2 text-sm font-semibold uppercase tracking-wider text-banana-600">Feedback</h2>
+          <h3 className="text-3xl font-bold text-foreground md:text-4xl">Example quotes</h3>
+          <p className="mx-auto mt-3 max-w-2xl text-sm text-muted-foreground">
+            These are illustrative examples, not verified customer endorsements.
+          </p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-3">
@@ -43,7 +46,9 @@ export function Reviews() {
                     <Star key={i} className="h-4 w-4 fill-banana-400 text-banana-400" />
                   ))}
                 </div>
-                <p className="mb-6 text-muted-foreground">"{review.content}"</p>
+                <p className="mb-6 text-muted-foreground">
+                  &ldquo;{review.content}&rdquo;
+                </p>
                 <div className="flex items-center gap-3">
                   <Avatar className="h-10 w-10 bg-banana-100">
                     <AvatarFallback className="bg-banana-100 text-banana-700">{review.avatar}</AvatarFallback>
